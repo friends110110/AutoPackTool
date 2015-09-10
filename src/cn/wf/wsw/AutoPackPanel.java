@@ -13,6 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -30,6 +31,7 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.FormData;
@@ -43,9 +45,9 @@ import cn.wf.wsw.tool.SaveBean;
 import cn.wf.wsw.tool.SaveSeriliationUtils;
 
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.jface.viewers.ListViewer;
-import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.FormText;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
+
 
 public class AutoPackPanel {
 
@@ -61,7 +63,9 @@ public class AutoPackPanel {
 	private Combo manifestAddress;
 	private Combo stringAddress;
 	private Text commandStr;
-	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
+	private Group output;
+	private DirectoryDialog folderdlg;
+	private FileDialog filedialog;
 	/**
 	 * Launch the application.
 	 * @param args
@@ -129,8 +133,9 @@ public class AutoPackPanel {
 		shlAutoPackageIntegration.setSize(812, 536);
 		shlAutoPackageIntegration.setText("Auto Package Integration Tool");
 		shlAutoPackageIntegration.setLayout(null);
-
-		
+		folderdlg=new DirectoryDialog(shlAutoPackageIntegration);
+		filedialog=new FileDialog(new JFrame(), "",FileDialog.LOAD);
+		 
 		Group input = new Group(shlAutoPackageIntegration, SWT.NONE);
 		input.setText("\u8F93\u5165");
 		input.setBounds(10, 10, 773, 340);
@@ -158,7 +163,7 @@ public class AutoPackPanel {
 		configFileSearch.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				chooseFile("文件查找", configFileAddress);
+				chooseDirectory("配置文件目录", configFileAddress);
 				
 			}
 		});
@@ -217,7 +222,7 @@ public class AutoPackPanel {
 		configFileAddress.setItems(new String[] {});
 		configFileAddress.setBounds(129, 82, 509, 25);
 		
-		Group output = new Group(shlAutoPackageIntegration, SWT.NONE);
+		output = new Group(shlAutoPackageIntegration, SWT.NONE);
 		output.setText("\u8F93\u51FA");
 		output.setBounds(10, 356, 773, 130);
 		output.setLayout(new FormLayout());
@@ -227,7 +232,7 @@ public class AutoPackPanel {
 		pictureSearch.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				chooseFile("搜索图片", pictureAddress);
+				chooseDirectory("更换图片位置", pictureAddress);
 			
 			}
 		});
@@ -329,13 +334,22 @@ public class AutoPackPanel {
 		commandStr = new Text(input, SWT.BORDER);
 		commandStr.setText("ant");
 		commandStr.setBounds(642, 246, 85, 23);
+		
+		Menu menu = new Menu(input);
+		input.setMenu(menu);
+		
+		MenuItem mntmNewItem = new MenuItem(menu, SWT.NONE);
+		mntmNewItem.setText("New Item");
+		
+		Menu menu_1 = new Menu(shlAutoPackageIntegration, SWT.BAR);
+		shlAutoPackageIntegration.setMenuBar(menu_1);
 	}
 	private void chooseFile(String title,Combo combo){
-		Frame f=new Frame();
-		FileDialog fd=new FileDialog(f, title,FileDialog.LOAD);
-		fd.setVisible(true);
-	  String dirPath = fd.getDirectory();//获取文件路径  
-      String fileName = fd.getFile();//获取文件名称  
+		
+		filedialog.setTitle(title);
+		filedialog.setVisible(true);
+		String dirPath = filedialog.getDirectory();//获取文件路径  
+		String fileName = filedialog.getFile();//获取文件名称  
         //System.out.println(dirPath +"++"+ fileName);  
           
         //如果打开路径 或 目录为空 则返回空  
@@ -354,5 +368,32 @@ public class AutoPackPanel {
         	combo.setItems(newHis);
         }
         combo.setText(dirPath+fileName);
+	}
+	private void chooseDirectory(String title,Combo combo){
+        
+      //设置文件对话框的标题
+      folderdlg.setText("文件选择");
+      //设置初始路径
+      //设置对话框提示文本信息
+      folderdlg.setMessage(title);
+      //打开文件对话框，返回选中文件夹目录
+      String selecteddir=folderdlg.open();
+         
+        //如果打开路径 或 目录为空 则返回空  
+        if(selecteddir == null )  
+                return ;  
+        String [] historyStrings=combo.getItems();
+        String [] newHis=new String[historyStrings.length+1];
+        newHis[0]=selecteddir;
+        if(null!=historyStrings){
+        	for(int i=0;i<historyStrings.length;i++){
+        		newHis[i+1]=historyStrings[i];
+        	}
+        	/*
+        	 * 加入到下拉框
+        	 * */
+        	combo.setItems(newHis);
+        }
+        combo.setText(selecteddir);
 	}
 }

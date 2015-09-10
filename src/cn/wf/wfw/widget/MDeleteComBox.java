@@ -442,64 +442,64 @@ public class MDeleteComBox extends JComboBox {
      * 
      * @param args
      */
-    public static void main(String[] args) {
-
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager
-                            .getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedLookAndFeelException e) {
-                    e.printStackTrace();
-                }
-                JFrame _frame = new JFrame();
-                
-                
-                
-                Icon _icon1 = new ImageIcon("/Users/wyj/Documents/workspace/mytest/resources/a.png");
-                Icon _icon2 = new ImageIcon("/Users/wyj/Documents/workspace/mytest/resources/b.png");
-                Icon _icon3 = new ImageIcon("/Users/wyj/Documents/workspace/mytest/resources/c.png");
-
-                MDeleteComBoxEntry[] items = new MDeleteComBoxEntry[] {
-                        new MDeleteComBoxEntry(null, "Wang"),
-                        new MDeleteComBoxEntry(null, "Zhang"),
-                        new MDeleteComBoxEntry(null, "Zhong") };
-                JComboBox _comBox = new MDeleteComBox(items);
-                _comBox.setPreferredSize(new Dimension(150, 25));
-                _comBox.setEditable(true);
-                //_comBox.setDefaultIcon(_icon1);
-               // _comBox.setBDefaultIconShow(true);
-//                _comBox.addMItemListener(new MItemListener() {
-//                    @Override
-//                    public void itemDeleted(MDeleteComBoxEntry entry) {
-//                        System.out.println("entry deleted:" + entry.getText());
-//                    }
+//    public static void main(String[] args) {
 //
-//                    @Override
-//                    public void itemSelected(MDeleteComBoxEntry entry) {
-//                        System.out.println("entry selected:" + entry.getText());
-//                    }
+//        SwingUtilities.invokeLater(new Runnable() {
 //
-//                });
-                System.out.println(_comBox.getItemListeners());
-                
-                JPanel _panel = new JPanel();
-                _panel.add(_comBox);
-
-                _frame.add(_panel);
-                _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                _frame.setSize(new Dimension(400, 300));
-                _frame.setVisible(true);
-            }
-
-        });
-    }
+//            @Override
+//            public void run() {
+//                try {
+//                    UIManager.setLookAndFeel(UIManager
+//                            .getSystemLookAndFeelClassName());
+//                } catch (ClassNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (InstantiationException e) {
+//                    e.printStackTrace();
+//                } catch (IllegalAccessException e) {
+//                    e.printStackTrace();
+//                } catch (UnsupportedLookAndFeelException e) {
+//                    e.printStackTrace();
+//                }
+//                JFrame _frame = new JFrame();
+//                
+//                
+//                
+//                Icon _icon1 = new ImageIcon("/Users/wyj/Documents/workspace/mytest/resources/a.png");
+//                Icon _icon2 = new ImageIcon("/Users/wyj/Documents/workspace/mytest/resources/b.png");
+//                Icon _icon3 = new ImageIcon("/Users/wyj/Documents/workspace/mytest/resources/c.png");
+//
+//                MDeleteComBoxEntry[] items = new MDeleteComBoxEntry[] {
+//                        new MDeleteComBoxEntry(null, "Wang"),
+//                        new MDeleteComBoxEntry(null, "Zhang"),
+//                        new MDeleteComBoxEntry(null, "Zhong") };
+//                JComboBox _comBox = new MDeleteComBox(items);
+//                _comBox.setPreferredSize(new Dimension(150, 25));
+//                _comBox.setEditable(true);
+//                //_comBox.setDefaultIcon(_icon1);
+//               // _comBox.setBDefaultIconShow(true);
+////                _comBox.addMItemListener(new MItemListener() {
+////                    @Override
+////                    public void itemDeleted(MDeleteComBoxEntry entry) {
+////                        System.out.println("entry deleted:" + entry.getText());
+////                    }
+////
+////                    @Override
+////                    public void itemSelected(MDeleteComBoxEntry entry) {
+////                        System.out.println("entry selected:" + entry.getText());
+////                    }
+////
+////                });
+//                System.out.println(_comBox.getItemListeners());
+//                
+//                JPanel _panel = new JPanel();
+//                _panel.add(_comBox);
+//
+//                _frame.add(_panel);
+//                _frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                _frame.setSize(new Dimension(400, 300));
+//                _frame.setVisible(true);
+//            }
+//
+//        });
+//    }
 }
