@@ -137,18 +137,18 @@ public class AutoPackPanel {
 		
 		Label lblNewLabel = new Label(input, SWT.NONE);
 		lblNewLabel.setBounds(43, 24, 80, 20);
-		lblNewLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 12, SWT.NORMAL));
+		lblNewLabel.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 12, SWT.NORMAL));
 		lblNewLabel.setText("\u57FA\u7EBF\u5730\u5740\uFF1A");
 		
 		Label label = new Label(input, SWT.NONE);
 		label.setBounds(75, 50, 48, 20);
 		label.setText("\u56FE\u7247\uFF1A");
-		label.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 12, SWT.NORMAL));
+		label.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 12, SWT.NORMAL));
 		
 		Label label_1 = new Label(input, SWT.NONE);
 		label_1.setBounds(43, 76, 80, 20);
 		label_1.setText("\u914D\u7F6E\u6587\u4EF6\uFF1A");
-		label_1.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 12, SWT.NORMAL));
+		label_1.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 12, SWT.NORMAL));
 		
 
 		
@@ -158,7 +158,7 @@ public class AutoPackPanel {
 		configFileSearch.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				chooseFile("ÎÄ¼ş²éÕÒ", configFileAddress);
+				chooseFile("æ–‡ä»¶æŸ¥æ‰¾", configFileAddress);
 				
 			}
 		});
@@ -171,7 +171,7 @@ public class AutoPackPanel {
 		Label label_2 = new Label(input, SWT.NONE);
 		label_2.setBounds(43, 215, 80, 20);
 		label_2.setText("\u4FEE\u6539\u53C2\u6570\uFF1A");
-		label_2.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 12, SWT.NORMAL));
+		label_2.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 12, SWT.NORMAL));
 		
 		packageParam = new Text(input, SWT.BORDER);
 		packageParam.setBounds(253, 216, 250, 23);
@@ -179,12 +179,12 @@ public class AutoPackPanel {
 		Label lblPackage = new Label(input, SWT.NONE);
 		lblPackage.setBounds(167, 215, 80, 23);
 		lblPackage.setText("package =");
-		lblPackage.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 12, SWT.NORMAL));
+		lblPackage.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 12, SWT.NORMAL));
 		
 		Label lblVersioncode = new Label(input, SWT.NONE);
 		lblVersioncode.setBounds(134, 246, 117, 23);
 		lblVersioncode.setText("version_code =");
-		lblVersioncode.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 12, SWT.NORMAL));
+		lblVersioncode.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 12, SWT.NORMAL));
 		
 		versionCodeParam = new Text(input, SWT.BORDER);
 		versionCodeParam.setBounds(253, 246, 250, 23);
@@ -195,12 +195,12 @@ public class AutoPackPanel {
 		Label lblVersionname = new Label(input, SWT.NONE);
 		lblVersionname.setBounds(134, 276, 117, 23);
 		lblVersionname.setText("version_name=");
-		lblVersionname.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 12, SWT.NORMAL));
+		lblVersionname.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 12, SWT.NORMAL));
 		
 		Label lblappname = new Label(input, SWT.NONE);
 		lblappname.setBounds(43, 303, 208, 20);
 		lblappname.setText("\u5BA2\u6237\u7AEF\u540D\u79F0\uFF08app_name\uFF09=");
-		lblappname.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 12, SWT.NORMAL));
+		lblappname.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 12, SWT.NORMAL));
 		
 		appNameParam = new Text(input, SWT.BORDER);
 		appNameParam.setBounds(253, 304, 250, 23);
@@ -227,7 +227,7 @@ public class AutoPackPanel {
 		pictureSearch.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				chooseFile("ËÑË÷Í¼Æ¬", pictureAddress);
+				chooseFile("æœç´¢å›¾ç‰‡", pictureAddress);
 			
 			}
 		});
@@ -241,14 +241,14 @@ public class AutoPackPanel {
 		
 		Label lblAndroidmanifest = new Label(input, SWT.NONE);
 		lblAndroidmanifest.setText("Manifest");
-		lblAndroidmanifest.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 12, SWT.NORMAL));
+		lblAndroidmanifest.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 12, SWT.NORMAL));
 		lblAndroidmanifest.setBounds(43, 136, 80, 20);
 		
 		Button manifestSearch = new Button(input, SWT.NONE);
 		manifestSearch.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				chooseFile("ËÑË÷manifest", manifestAddress);
+				chooseFile("æœç´¢manifest", manifestAddress);
                 
 			}
 		});
@@ -262,10 +262,10 @@ public class AutoPackPanel {
 				//first  replace androidmanifest  the three params
 				JFrame jf=new JFrame();
 				if(configFileAddress.getText().equals("")){
-//					outputList.add("°ÑÄÚÈİ¸øÎÒÊä½ø"+"\n");
+//					outputList.add("æŠŠå†…å®¹ç»™æˆ‘è¾“è¿›"+"\n");
 //					outputList.setItems(new String[]{"sbsbs"});
 					
-					JOptionPane.showMessageDialog(null, "°ÑÄÚÈİ¸øÎÒÊä½øÈ¥");
+					JOptionPane.showMessageDialog(null, "æŠŠå†…å®¹ç»™æˆ‘è¾“è¿›å»");
 				
 					return;
 				}
@@ -283,7 +283,7 @@ public class AutoPackPanel {
 			            StringBuilder sb = new StringBuilder();  
 			            while ((line = br.readLine()) != null) {  
 //			            	outputList.add(line+"\n");
-			            	//ÕâÀï
+			            	//è¿™é‡Œ
 			            	//sb.append(line + "\n");  
 			            }  
 			            System.out.println(sb.toString());  
@@ -308,14 +308,14 @@ public class AutoPackPanel {
 		
 		Label lblStringxml = new Label(input, SWT.NONE);
 		lblStringxml.setText("string.xml");
-		lblStringxml.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 12, SWT.NORMAL));
+		lblStringxml.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 12, SWT.NORMAL));
 		lblStringxml.setBounds(43, 169, 80, 27);
 		
 		Button stringSearch = new Button(input, SWT.NONE);
 		stringSearch.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				chooseFile("²éÕÒstring.xml", stringAddress);
+				chooseFile("æŸ¥æ‰¾string.xml", stringAddress);
 			}
 		});
 		stringSearch.setText("\u6D4F\u89C8");
@@ -334,11 +334,11 @@ public class AutoPackPanel {
 		Frame f=new Frame();
 		FileDialog fd=new FileDialog(f, title,FileDialog.LOAD);
 		fd.setVisible(true);
-	  String dirPath = fd.getDirectory();//»ñÈ¡ÎÄ¼şÂ·¾¶  
-      String fileName = fd.getFile();//»ñÈ¡ÎÄ¼şÃû³Æ  
+	  String dirPath = fd.getDirectory();//è·å–æ–‡ä»¶è·¯å¾„  
+      String fileName = fd.getFile();//è·å–æ–‡ä»¶åç§°  
         //System.out.println(dirPath +"++"+ fileName);  
           
-        //Èç¹û´ò¿ªÂ·¾¶ »ò Ä¿Â¼Îª¿Õ Ôò·µ»Ø¿Õ  
+        //å¦‚æœæ‰“å¼€è·¯å¾„ æˆ– ç›®å½•ä¸ºç©º åˆ™è¿”å›ç©º  
         if(dirPath == null || fileName == null)  
                 return ;  
         String [] historyStrings=combo.getItems();
@@ -349,7 +349,7 @@ public class AutoPackPanel {
         		newHis[i+1]=historyStrings[i];
         	}
         	/*
-        	 * ¼ÓÈëµ½ÏÂÀ­¿ò
+        	 * åŠ å…¥åˆ°ä¸‹æ‹‰æ¡†
         	 * */
         	combo.setItems(newHis);
         }
