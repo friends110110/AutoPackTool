@@ -20,11 +20,11 @@ public class EditFileTools {
 	        BufferedReader br = new BufferedReader(isr);
 	        StringBuffer buf = new StringBuffer();
 	        String temp;
-	        //	<string name="app_name">�°�֤ȯ</string>
+	        //	<string name="app_name">�°�֤ȯ</string>
 
 	        while((temp=br.readLine())!=null){
 	            if(temp.trim().startsWith("app_name")) {
-	                temp="\t"+"<string name='app_name'>"+appname+"</string>";
+	                temp="\t"+"<string name=\"app_name\">"+appname+"</string>";
 	            }
 	            buf=buf.append(temp);         
 	            buf = buf.append(System.getProperty("line.separator"));
@@ -53,11 +53,11 @@ public class EditFileTools {
         String temp;
         while((temp=br.readLine())!=null){
             if(temp.trim().startsWith("package")) {
-                temp="\tpackage='"+packageName+"'";
+                temp="\tpackage=\""+packageName+"\"";
             }else if(temp.trim().startsWith("android:versionCode")){
-                temp="\tandroid:versionCode='"+versionCode+"'";
+                temp="\tandroid:versionCode=\""+versionCode+"\"";
             }else if(temp.trim().startsWith("android:versionName")){
-                temp="\tandroid:versionName="+versionName+"'";
+                temp="\tandroid:versionName=\""+versionName+"\"";
             }
             buf=buf.append(temp);         
             buf = buf.append(System.getProperty("line.separator"));

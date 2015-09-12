@@ -16,6 +16,7 @@ import javax.swing.plaf.basic.*;
  * @Author Michael.Wang
  * @Email wqjsir@foxmail.com
  * @version 1.0 2011-5-16上午10:15:27
+ * @param <E>
  **/
 public class MDeleteComBox extends JComboBox {
 
@@ -55,7 +56,26 @@ public class MDeleteComBox extends JComboBox {
     public void setDefaultIcon(Icon defaultIcon) {
         this.defaultIcon = defaultIcon;
     }
+    public void addItem(MDeleteComBoxEntry boxEntry){
+    	DefaultComboBoxModel comboBoxModel=(DefaultComboBoxModel) this.getModel();
+    	comboBoxModel.addElement(boxEntry);
+        setUI(new MDeleteComBoxUI());
 
+    }
+    public void clearItems(){
+    	DefaultComboBoxModel comboBoxModel=(DefaultComboBoxModel) this.getModel();
+    	comboBoxModel.removeAllElements();
+    	comboBoxModel.addElement(new MDeleteComBoxEntry("浏览...."));
+        setUI(new MDeleteComBoxUI());
+    }
+//    public void setSelectedIndex(int i){
+//    	DefaultComboBoxModel comboBoxModel=(DefaultComboBoxModel) this.getModel();
+////    	comboBoxModel.setSelectedItem();
+//    	comboBoxModel.setSelectedItem(comboBoxModel.getElementAt(i));
+//        //setUI(new MDeleteComBoxUI());
+//
+//
+//    }
     /**
      * 调整图片大小。该方法为一个工具类中的方法。这里直接copy过来
      * 
@@ -253,6 +273,8 @@ public class MDeleteComBox extends JComboBox {
             DefaultComboBoxModel _model = (DefaultComboBoxModel) comboBox
                     .getModel();
             int size = _model == null ? 0 : _model.getSize();
+            this.setPopupSize(new Dimension(-1,40));
+            
             this.removeAll();
             for (int i = 0; i < size; i++) {
                 MDeleteComBoxEntry _entry = (MDeleteComBoxEntry) _model
@@ -339,9 +361,10 @@ public class MDeleteComBox extends JComboBox {
                     _comp.setFont(new Font(Font.DIALOG, Font.PLAIN, 18));
                     _comp.setForeground(selectedForeground);
                     if (_comp instanceof JLabel) {
-                        JLabel _label = (JLabel) _comp;
+                        JLabel _label = (JLabel) _comp; 
                         if ("x".equals(_label.getText())) {
                             _label.setVisible(true);
+                            
                         } else if (_label.getIcon() != null) {
                             resizeImageIcon((ImageIcon) _label.getIcon(),
                                     maxIconSize);
@@ -472,23 +495,33 @@ public class MDeleteComBox extends JComboBox {
 //                        new MDeleteComBoxEntry(null, "Wang"),
 //                        new MDeleteComBoxEntry(null, "Zhang"),
 //                        new MDeleteComBoxEntry(null, "Zhong") };
-//                JComboBox _comBox = new MDeleteComBox(items);
+//                MDeleteComBoxEntry[] items2 = new MDeleteComBoxEntry[] {
+//                        new MDeleteComBoxEntry(null, "Wang"),
+//                        new MDeleteComBoxEntry(null, "Zhang"),
+//                        new MDeleteComBoxEntry(null, "Zhong") };
+//                final MDeleteComBox _comBox = new MDeleteComBox(items);
 //                _comBox.setPreferredSize(new Dimension(150, 25));
 //                _comBox.setEditable(true);
+////                (_comBox).addItem(new MDeleteComBoxEntry("S"));
+//                _comBox.addItem(new MDeleteComBoxEntry("dsf"));
+////                _comBox.addItem(new MDeleteComBoxEntry(null,"sdf"));
 //                //_comBox.setDefaultIcon(_icon1);
 //               // _comBox.setBDefaultIconShow(true);
-////                _comBox.addMItemListener(new MItemListener() {
-////                    @Override
-////                    public void itemDeleted(MDeleteComBoxEntry entry) {
-////                        System.out.println("entry deleted:" + entry.getText());
-////                    }
-////
-////                    @Override
-////                    public void itemSelected(MDeleteComBoxEntry entry) {
-////                        System.out.println("entry selected:" + entry.getText());
-////                    }
-////
-////                });
+//                _comBox.addMItemListener(new MItemListener() {
+//                    @Override
+//                    public void itemDeleted(MDeleteComBoxEntry entry) {
+//                        System.out.println("entry deleted:" + entry.getText());
+//                    }
+//
+//                    @Override
+//                    public void itemSelected(MDeleteComBoxEntry entry) {
+//                        System.out.println("entry selected:" + entry.getText());
+//                        System.out.println("entry :" + _comBox.getSelectedIndex()+"  "+_comBox.getSelectedItem().toString());
+//
+//                    }
+//
+//                });
+//                _comBox.setSelectedIndex(1);
 //                System.out.println(_comBox.getItemListeners());
 //                
 //                JPanel _panel = new JPanel();
@@ -502,4 +535,5 @@ public class MDeleteComBox extends JComboBox {
 //
 //        });
 //    }
+
 }
