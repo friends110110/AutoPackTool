@@ -513,6 +513,8 @@ public class AutoPackTool {
 		btnNewButton = new JButton("svn");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				username="f";
+				password="f";
 				if(username==null||password==null||"".equals(username)||"".equals(password)){
 				AFrame af=new AFrame();
 				af.setVisible(true);
@@ -520,11 +522,11 @@ public class AutoPackTool {
 			//username=af.password;
 				return;
 			}
-				processPw.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD —depth=infinity —force "+destAddressCombox.getSelectedItem().toString()
-				+"--username "+username+"--password "+password);
+				processPw.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD -depth=infinity -force "+destAddressCombox.getSelectedItem().toString()
+				+" --username "+username+" --password "+password);
 				processPw.flush();
-				System.out.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD —depth=infinity —force "+destAddressCombox.getSelectedItem().toString()
-						+"--username "+username+"--password "+password);
+				System.out.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD -depth=infinity -force "+destAddressCombox.getSelectedItem().toString()
+						+" --username "+username+" --password "+password);
 			}
 		});
 		btnNewButton.setBounds(373, 372, 58, 23);
@@ -554,8 +556,8 @@ public class AutoPackTool {
 //		
 		try{
 			process = Runtime.getRuntime().exec("cmd");
-//			processPw=new PrintWriter(process.getOutputStream());
-//			processPw.println("chcp 65001");
+			processPw=new PrintWriter(process.getOutputStream());
+//			processPw.println("set nls_lang=american_america.zhs16gbk ");
 			processPw.flush();
 			  // 将CMD的输入流绑定到显示框中  
             new Thread(new Runnable() {
@@ -567,7 +569,7 @@ public class AutoPackTool {
                     processIs = process.getInputStream();
                     try{
                     while((size = processIs.read(buf)) != -1) {  
-                    	String str=new String(buf,0,size,"utf-8");
+                    	String str=new String(buf,0,size,"gbk");
                     	outputArea.append(str);  
                     	//area显示位置
                     	outputArea.setCaretPosition(outputArea.getDocument().getLength());
