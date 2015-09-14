@@ -123,7 +123,7 @@ public class AFrame extends JFrame
                      password=new String(mainFrame.jPasswordField.getPassword());//获取密码
                     System.out.println(username+"  "+password);
                     AutoPackTool.username=username;
-                    AutoPackTool.username=password;
+                    AutoPackTool.password=password;
 
                     setVisible(false);
                 }

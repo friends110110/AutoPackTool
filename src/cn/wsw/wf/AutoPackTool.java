@@ -73,6 +73,7 @@ public class AutoPackTool {
 	private JFrame frame;
 	Process process;
 	PrintWriter processPw;
+	InputStream processIs;
 	MDeleteComBox baseAddressCombox;
 	MDeleteComBox destAddressCombox;
 	MDeleteComBox picLocationCombox;
@@ -108,6 +109,7 @@ public class AutoPackTool {
 	
 	public static String username = null;
 	public static String password = null;
+	private JButton btnNewButton;
 	/**
 	 * Launch the application.
 	 */
@@ -173,6 +175,14 @@ public class AutoPackTool {
 						versionCodeTextField.getText(),versionNameTextField.getText(),appNameTextField.getText()
 						);
 				SaveSeriliationUtils.saveDataToFile(sb);
+				
+				try {
+					processPw.close();
+					processIs.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		frame.setBounds(100, 100, 588, 753);
@@ -432,17 +442,18 @@ public class AutoPackTool {
 				
 					return;
 				}
-				if(username==null||password==null||"".equals(username)||"".equals(password)){
-					AFrame af=new AFrame();
-					af.setVisible(true);
-				//username=af.username;
-				//username=af.password;
-					return;
-				}
+//				if(username==null||password==null||"".equals(username)||"".equals(password)){
+//					AFrame af=new AFrame();
+//					af.setVisible(true);
+//				//username=af.username;
+//				//username=af.password;
+//					return;
+//				}
 				//second cheout svn to dest Address
-				processPw.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD —depth=infinity —force"+destAddressCombox.getSelectedItem().toString()
-							+"--username "+username+"--password "+password);
-				processPw.flush();
+				// svn address
+//				processPw.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD —depth=infinity —force"+destAddressCombox.getSelectedItem().toString()
+//							+"--username "+username+"--password "+password);
+//				processPw.flush();
 				
 				EditFileTools.editManifest(manifetCombox.getSelectedItem().toString(), packageTextField.getText(), versionCodeTextField.getText(), versionNameTextField.getText());
 				EditFileTools.editAppName(stringCombox.getSelectedItem().toString(),appNameTextField.getText());
@@ -451,16 +462,19 @@ public class AutoPackTool {
 				String confDirectoryPath=confLocationCombox.getSelectedItem().toString();
 				String picDirectoryPath=picLocationCombox.getSelectedItem().toString();
 			// run the script to ant compile
+				processPw.println("@echo off");
 				processPw.println("set codepath="+confDirectoryPath);
 				processPw.println("set resourcepath="+picDirectoryPath);
-				processPw.println("mv %resourcepath%\\AndroidManifest\\*.* %codepath%\\AndroidManifest\\/e/h/y");
-				processPw.println("mv %resourcepath%\\config\\*.* %codepath%\\res\raw\\/e/h/y");
-				processPw.println("mv %resourcepath%\\picture\\*.* %codepath%\\res\\drawable-hdpi\\/e/h/y");
-				processPw.println("mv %resourcepath%\\other\\*.* %codepath%\\res\\values\\/e/h/y");
-				processPw.println("exec ant");
-				processPw.println("mv %codepath%\\packet\\*.* %resourcepath%\\/e/h/y");
+				processPw.println("xcopy %resourcepath%\\AndroidManifest\\*.* %codepath%\\AndroidManifest\\/e/h/y");
+				processPw.println("xcopy %resourcepath%\\config\\*.* %codepath%\\res\raw\\/e/h/y");
+				processPw.println("xcopy %resourcepath%\\picture\\*.* %codepath%\\res\\drawable-hdpi\\/e/h/y");
+				processPw.println("xcopy %resourcepath%\\other\\*.* %codepath%\\res\\values\\/e/h/y");
+				processPw.println("call D:\\android5.0packet\\ant.bat");
+				processPw.println("xcopy %codepath%\\packet\\*.* %resourcepath%\\/e/h/y");
+				processPw.println("echo. & pause");
 				processPw.flush();
-
+				
+				
 					  // 将CMD的输入流绑定到显示框中  
 		   
 				
@@ -468,7 +482,7 @@ public class AutoPackTool {
 //				
 			}
 		});
-		integrationBtn.setBounds(426, 372, 116, 23);
+		integrationBtn.setBounds(434, 372, 108, 23);
 		panel.add(integrationBtn);
 		
 		commandTextField = new JTextField();
@@ -484,7 +498,7 @@ public class AutoPackTool {
 				processPw.flush();
 			}
 		});
-		btnExecute.setBounds(307, 372, 93, 23);
+		btnExecute.setBounds(299, 372, 75, 23);
 		panel.add(btnExecute);
 		
 		clearbtn = new JButton("clear");
@@ -495,6 +509,26 @@ public class AutoPackTool {
 		});
 		clearbtn.setBounds(0, 372, 93, 23);
 		panel.add(clearbtn);
+		
+		btnNewButton = new JButton("svn");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(username==null||password==null||"".equals(username)||"".equals(password)){
+				AFrame af=new AFrame();
+				af.setVisible(true);
+			//username=af.username;
+			//username=af.password;
+				return;
+			}
+				processPw.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD —depth=infinity —force "+destAddressCombox.getSelectedItem().toString()
+				+"--username "+username+"--password "+password);
+				processPw.flush();
+				System.out.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD —depth=infinity —force "+destAddressCombox.getSelectedItem().toString()
+						+"--username "+username+"--password "+password);
+			}
+		});
+		btnNewButton.setBounds(373, 372, 58, 23);
+		panel.add(btnNewButton);
 		
 
 		
@@ -520,8 +554,9 @@ public class AutoPackTool {
 //		
 		try{
 			process = Runtime.getRuntime().exec("cmd");
-			processPw=new PrintWriter(process.getOutputStream());
-
+//			processPw=new PrintWriter(process.getOutputStream());
+//			processPw.println("chcp 65001");
+			processPw.flush();
 			  // 将CMD的输入流绑定到显示框中  
             new Thread(new Runnable() {
                 @Override
@@ -529,10 +564,10 @@ public class AutoPackTool {
                     // TODO Auto-generated method stub
                     int size;
                     byte[] buf=new byte[1024];
-                    InputStream is = process.getInputStream();
+                    processIs = process.getInputStream();
                     try{
-                    while((size = is.read(buf)) != -1) {  
-                    	String str=new String(buf,0,size,"gbk");
+                    while((size = processIs.read(buf)) != -1) {  
+                    	String str=new String(buf,0,size,"utf-8");
                     	outputArea.append(str);  
                     	//area显示位置
                     	outputArea.setCaretPosition(outputArea.getDocument().getLength());
@@ -750,46 +785,14 @@ public class AutoPackTool {
 ////	        System.out.println("-------------------------");
 	}
 	private boolean isAllComboxHasEntered(){
-		 int num=baseAddressCombox.getItemCount()+ picLocationCombox.getItemCount()+confLocationCombox.getItemCount()+manifetCombox.getItemCount()+stringCombox.getItemCount();
-		 if(num<=5){
-			 return false;
+		 boolean flag= (picLocationCombox.getItemCount()!=1) &&
+				 (confLocationCombox.getItemCount()!=1)&&(manifetCombox.getItemCount()!=1)&&(stringCombox.getItemCount()!=1);
+		 if(false==flag){
+			 return flag;
 		 }
-		 boolean flag=!packageTextField.getText().equals("")&& !versionCodeTextField.getText().equals("")&&!versionNameTextField.getText().equals("")
+		 flag=!packageTextField.getText().equals("")&& !versionCodeTextField.getText().equals("")&&!versionNameTextField.getText().equals("")
 				 &&!appNameTextField.getText().equals("")&&!commandTextField.getText().equals("");
 		return flag;
 	}
-    private  void editManifest(String filePath,String packageName,String versionCode,String versionName){
-    	if(null==filePath||"".equals(filePath))
-    		return;
-    	try{
-        File file =  new File(filePath);
-        FileInputStream fis = new FileInputStream(file);
-        InputStreamReader isr = new InputStreamReader(fis);
-        BufferedReader br = new BufferedReader(isr);
-        StringBuffer buf = new StringBuffer();
-        String temp;
-        while((temp=br.readLine())!=null){
-            if(temp.trim().startsWith("package")) {
-                temp="\tpackage='"+packageName+"'";
-            }else if(temp.trim().startsWith("android:versionCode")){
-                temp="\tandroid:versionCode='"+versionCode+"'";
-            }else if(temp.trim().startsWith("android:versionName")){
-                temp="\tandroid:versionName="+versionName+"'";
-            }
-            buf=buf.append(temp);         
-            buf = buf.append(System.getProperty("line.separator"));
 
-        }
-        
-        br.close();
-        FileOutputStream fos = new FileOutputStream(file);
-        PrintWriter pw = new PrintWriter(fos);
-        pw.write(buf.toString().toCharArray());
-        pw.flush();
-        pw.close();
-    }catch(Exception e){
-    	e.printStackTrace();
-    }
-   }
-	
 }
