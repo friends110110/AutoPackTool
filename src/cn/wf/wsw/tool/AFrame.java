@@ -122,8 +122,8 @@ public class AFrame extends JFrame
                      username=mainFrame.jTextFieldUser.getText().trim().toLowerCase();//获取用户名
                      password=new String(mainFrame.jPasswordField.getPassword());//获取密码
                     System.out.println(username+"  "+password);
-                    AutoPackTool.username=username;
-                    AutoPackTool.password=password;
+//                    AutoPackTool.username=username;
+//                    AutoPackTool.password=password;
 
                     setVisible(false);
                 }

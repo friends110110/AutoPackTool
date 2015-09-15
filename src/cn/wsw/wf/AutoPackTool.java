@@ -462,6 +462,24 @@ public class AutoPackTool {
 				String confDirectoryPath=confLocationCombox.getSelectedItem().toString();
 				String picDirectoryPath=picLocationCombox.getSelectedItem().toString();
 			// run the script to ant compile
+				
+				String [] destStr=destAddressCombox.getSelectedItem().toString().split(":");
+				
+				
+				String osName=System.getProperties().getProperty("os.name");
+				if(osName.startsWith("Windows")){
+					processPw.println(destStr[0]+":");
+					processPw.flush();
+
+					processPw.println("cd  "+destAddressCombox.getSelectedItem().toString());
+
+				}else if(osName.startsWith("Mac")){
+					processPw.println(destAddressCombox.getSelectedItem().toString());
+				}
+				processPw.flush();
+				processPw.println("dir");
+				processPw.flush();
+
 				processPw.println("@echo off");
 				processPw.println("set codepath="+confDirectoryPath);
 				processPw.println("set resourcepath="+picDirectoryPath);
@@ -469,7 +487,7 @@ public class AutoPackTool {
 				processPw.println("xcopy %resourcepath%\\config\\*.* %codepath%\\res\raw\\/e/h/y");
 				processPw.println("xcopy %resourcepath%\\picture\\*.* %codepath%\\res\\drawable-hdpi\\/e/h/y");
 				processPw.println("xcopy %resourcepath%\\other\\*.* %codepath%\\res\\values\\/e/h/y");
-				processPw.println("call D:\\android5.0packet\\ant.bat");
+				processPw.println("call D:\\android5.0packet\\apache-ant-1.9.6\\bin\\ant.bat");
 				processPw.println("xcopy %codepath%\\packet\\*.* %resourcepath%\\/e/h/y");
 				processPw.println("echo. & pause");
 				processPw.flush();
@@ -513,8 +531,8 @@ public class AutoPackTool {
 		btnNewButton = new JButton("svn");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				username="f";
-				password="f";
+				username=AFrame.username;
+				password=AFrame.password;
 				if(username==null||password==null||"".equals(username)||"".equals(password)){
 				AFrame af=new AFrame();
 				af.setVisible(true);
@@ -522,11 +540,11 @@ public class AutoPackTool {
 			//username=af.password;
 				return;
 			}
-				processPw.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD -depth=infinity -force "+destAddressCombox.getSelectedItem().toString()
-				+" --username "+username+" --password "+password);
-				processPw.flush();
-				System.out.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD -depth=infinity -force "+destAddressCombox.getSelectedItem().toString()
-						+" --username "+username+" --password "+password);
+			processPw.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD -depth=infinity -force "+destAddressCombox.getSelectedItem().toString()
+			+" --username "+username+" --password "+password);
+			processPw.flush();
+			System.out.println("svn checkout "+baseAddressCombox.getSelectedItem().toString()+" "+"-r HEAD -depth=infinity -force "+destAddressCombox.getSelectedItem().toString()
+					+" --username "+username+" --password "+password);
 			}
 		});
 		btnNewButton.setBounds(373, 372, 58, 23);
@@ -555,7 +573,12 @@ public class AutoPackTool {
 //		}
 //		
 		try{
-			process = Runtime.getRuntime().exec("cmd");
+			String osName=System.getProperties().getProperty("os.name");
+			if(osName.startsWith("Windows")){
+				process = Runtime.getRuntime().exec("cmd");
+			}else if(osName.startsWith("Mac")){
+				process = Runtime.getRuntime().exec("bash");
+			}
 			processPw=new PrintWriter(process.getOutputStream());
 //			processPw.println("set nls_lang=american_america.zhs16gbk ");
 			processPw.flush();
