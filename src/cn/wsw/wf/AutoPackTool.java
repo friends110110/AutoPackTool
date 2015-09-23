@@ -479,7 +479,9 @@ public class AutoPackTool {
 				processPw.flush();
 				processPw.println("dir");
 				processPw.flush();
-
+				//processPw.println("cd C:\\Users/\Administrator\\Desktop\\ajzq\BL-V5.5.1.23-20150909\\source\\TZYJ_Android");
+				
+				
 				processPw.println("@echo off");
 				processPw.println("set codepath="+confDirectoryPath);
 				processPw.println("set resourcepath="+picDirectoryPath);
@@ -487,7 +489,7 @@ public class AutoPackTool {
 				processPw.println("xcopy %resourcepath%\\config\\*.* %codepath%\\res\raw\\/e/h/y");
 				processPw.println("xcopy %resourcepath%\\picture\\*.* %codepath%\\res\\drawable-hdpi\\/e/h/y");
 				processPw.println("xcopy %resourcepath%\\other\\*.* %codepath%\\res\\values\\/e/h/y");
-				processPw.println("call D:\\android5.0packet\\apache-ant-1.9.6\\bin\\ant.bat");
+				processPw.println("call ant.bat");
 				processPw.println("xcopy %codepath%\\packet\\*.* %resourcepath%\\/e/h/y");
 				processPw.println("echo. & pause");
 				processPw.flush();

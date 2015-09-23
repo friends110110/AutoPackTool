@@ -57,7 +57,7 @@ public class EditFileTools {
             }else if(temp.trim().startsWith("android:versionCode")){
                 temp="\tandroid:versionCode=\""+versionCode+"\"";
             }else if(temp.trim().startsWith("android:versionName")){
-                temp="\tandroid:versionName=\""+versionName+"\"";
+                temp="\tandroid:versionName=\""+versionName+"\""+" >";
             }
             buf=buf.append(temp);         
             buf = buf.append(System.getProperty("line.separator"));
